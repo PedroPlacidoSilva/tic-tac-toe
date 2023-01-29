@@ -11,8 +11,6 @@ function playRound(event) {
   const value = Number(event.target.getAttribute("value"));
 
   let player;
-  console.log(boardPlayer1.length);
-  console.log(boardPlayer2.length);
 
   if ((boardPlayer1.length + boardPlayer2.length) % 2 == 0) {
     player = users[0];
@@ -21,7 +19,11 @@ function playRound(event) {
   }
   console.log(player);
   // Update the board and store elements
-  if (!boardPlayer1.includes(value) && !boardPlayer2.includes(value)) {
+  if (
+    !boardPlayer1.includes(value) &&
+    !boardPlayer2.includes(value) &&
+    stopTheGame == 0
+  ) {
     if (player === users[0]) {
       boardPlayer1.push(value);
       this.textContent = player1Simbol;
@@ -32,16 +34,19 @@ function playRound(event) {
   }
 
   for (const combination of winGame) {
-    //Variable to store message to be presented to the player
+    //Variable to store message to be presented to the player - Variable = 1 if there is a winner
 
     if (combination.every((elem) => boardPlayer1.includes(elem))) {
-      msg = `${users[0]} wins!`;
+      msg = `${users[0]} wins! Press Play Game to Restart`;
+      stopTheGame = 1;
     }
     if (combination.every((elem) => boardPlayer2.includes(elem))) {
-      msg = `${users[0]} wins!`;
+      msg = `${users[0]} wins! Press Play Game to Restart`;
+      stopTheGame = 1;
     }
     if (boardPlayer1.length + board.length == 9) {
-      msg = `${users[0]} wins!`;
+      msg = `${users[0]} wins! Press Play Game to Restart`;
+      stopTheGame = 1;
     }
     document.getElementById("messages").textContent = msg;
   }
@@ -95,6 +100,9 @@ const player1Simbol = "X";
 const player2Simbol = "O";
 let boardPlayer1 = [];
 let boardPlayer2 = [];
+
+// Variable to store if game is finished
+let stopTheGame = 0;
 
 const formUser = document.getElementById("formPlayers");
 
