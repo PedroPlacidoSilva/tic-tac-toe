@@ -35,13 +35,13 @@ function playRound(event) {
     //Variable to store message to be presented to the player
 
     if (combination.every((elem) => boardPlayer1.includes(elem))) {
-      msg = `${users[0]} wins!}`;
+      msg = `${users[0]} wins!`;
     }
     if (combination.every((elem) => boardPlayer2.includes(elem))) {
-      msg = `${users[0]} wins!}`;
+      msg = `${users[0]} wins!`;
     }
     if (boardPlayer1.length + board.length == 9) {
-      msg = `${users[0]} wins!}`;
+      msg = `${users[0]} wins!`;
     }
     document.getElementById("messages").textContent = msg;
   }
