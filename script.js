@@ -41,11 +41,11 @@ function playRound(event) {
       stopTheGame = 1;
     }
     if (combination.every((elem) => boardPlayer2.includes(elem))) {
-      msg = `${users[0]} wins! Press Play Game to Restart`;
+      msg = `${users[1]} wins! Press Play Game to Restart`;
       stopTheGame = 1;
     }
-    if (boardPlayer1.length + board.length == 9) {
-      msg = `${users[0]} wins! Press Play Game to Restart`;
+    if (boardPlayer1.length + boardPlayer2.length == 9) {
+      msg = `Draw! There are no winners! Press Play Game to Restart`;
       stopTheGame = 1;
     }
     document.getElementById("messages").textContent = msg;
@@ -79,6 +79,15 @@ function getPlayers(event) {
   document.getElementById("messages").textContent = "";
   // reset the user input after storing the array
   formUser.reset();
+  //Reset the plays of each player
+  boardPlayer1 = [];
+  boardPlayer2 = [];
+  const squares = document.querySelectorAll(".square");
+
+  squares.forEach((square) => {
+    square.textContent = "";
+  });
+  stopTheGame = 0;
 }
 
 // Store the users on Array
